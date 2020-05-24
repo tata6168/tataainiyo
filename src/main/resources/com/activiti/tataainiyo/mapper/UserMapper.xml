@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.activiti.tataainiyo.mapper.UserMapper">
+    <!--
+    void insert(T t);
+    void delete(T t);
+    void update(T t);
+    T selectOneById(Long id);
+    List<T> selectPage(Query<T> query);
+    -->
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="userId" keyColumn="userId">
+        INSERT INTO user(userName,passWord,roleId) VALUES(userName=#{userName},passWord=#{passWord},roleId=#{roleId})
+    </insert>
+    <update id="update" parameterType="User">
+        UPDATE user SET userName=#{userName},passWord=#{passWord},roleId=#{roleId} WHERE userId=#{userId}
+    </update>
+    <delete id="delete" parameterType="Long">
+        DELETE FROM user WHERE userId=#{userId}
+    </delete>
+    <select id="count" resultType="Long">
+        SELECT COUNT(*) FROM user;
+    </select>
+    <resultMap id="userInfoMap" type="User">
+        <id column="userId" property="userId"></id>
+        <result column="userName" property="userName"></result>
+        <result column="passWord" property="passWord"></result>
+        <result column="c" property="registerTime"></result>
+        <collection property="roleList" ofType="Role">
+            <id column="roleId" property="roleId"></id>
+            <result column="roleName" property="roleName"></result>
+            <collection property="permissionList" ofType="Permission">
+                <id column="permissionId" property="permissionId"></id>
+                <result column="sn" property="sn"></result>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="selectOneById" parameterType="Long" resultMap="userInfoMap">
+       SELECT u.userId AS userId,u.userName AS userName,u.passWord AS passWord,u.registerTime AS registerTime,
+              r.roleId AS roleId,r.roleName AS roleName,
+              p.permissionId AS permissionId,p.sn AS sn
+                FROM user u JOIN userbyrole ur ON u.userId = ur.userId
+                            JOIN role r ON r.roleId = ur.roleId
+                            JOIN rolebypermission rp ON rp.roleId = r.roleId
+                            JOIN permission p ON p.permissionId = rp.permissionId
+                            WHERE u.userId=#{userId};
+    </select>
+    <select id="authenticationName" resultType="User" parameterType="String">
+        SELECT userId AS userId,userName AS userName,passWord AS passWord FROM user WHERE userName = #{userName};
+    </select>
+    <select id="userByRole" resultType="Role" parameterType="Long">
+        SELECT r.roleId AS roleId FROM role r
+        JOIN userbyrole ur ON r.roleID = ur.roleId
+        JOIN user u ON ur.userId = u.userId
+        WHERE u.userId=#{userId}
+    </select>
+    <insert id="addUserRole" parameterType="User" >
+        INSERT userbyrole(userId,roleId) VALUES
+        <foreach collection="roleList" item="role" separator=",">
+            (#{userId},#{role.roleId})
+        </foreach>
+    </insert>
+    <select id="selectPage" resultType="User" parameterType="Query">
+        SELECT * FROM user
+        <if test="keyWords != '' and keyWords!=null">
+            WHERE userName CONCAT('%',#{keyWords},'%')
+        </if>
+        LIMIT  #{currentPage},#{pageSize};
+    </select>
+</mapper>

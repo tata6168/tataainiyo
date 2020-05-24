@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.activiti.tataainiyo.mapper.RoleMapper">
+    <!--更新中间表-->
+    <!--deletePermission(删除中间表)-->
+    <delete id="deletePermission" parameterType="Long">
+        DELETE FROM rolebypermission WHERE roleId = #{roleId}
+    </delete>
+    <!--角色权限中间表-->
+    <insert id="insertRoleByPermission" parameterType="Map">
+        INSERT INTO rolebypermission(roleId,permissionId) VALUES
+        <foreach collection="permissionList" item="item" separator=",">
+            (#{roleId},#{item})
+        </foreach>
+    </insert>
+    <!--deleteMenu删除菜单中间表-->
+    <delete id="deleteMenu" parameterType="Long">
+        DELETE FROM roleByMenu WHERE rolrId = #{roleId};
+    </delete>
+    <!--角色菜单中间中间表-->
+    <insert id="insertRoleByMenu" parameterType="Map">
+        INSERT INTO rolebymenu VALUES
+        <foreach collection="menuList" item="item" separator=",">
+            (#{roleId},#{item})
+        </foreach>
+    </insert>
+    <!--
+    void insert(T t);
+    void delete(T t);
+    void update(T t);
+    T selectOneById(Long id);
+    List<T> selectPage(Query<T> query);
+    -->
+    <insert id="insert" parameterType="Role" useGeneratedKeys="true" keyProperty="roleId" keyColumn="roleId">
+        INSERT INTO role(roleName) VALUES(#{roleName});
+    </insert>
+    <update id="update" parameterType="Role">
+        UPDATE role SET roleName=#{roleName} WHERE roleId=#{roleId}
+    </update>
+    <delete id="delete" parameterType="Long">
+        DELETE FROM role WHERE roleId=#{roleId}
+    </delete>
+    <select id="count" resultType="Long">
+        SELECT count (*) FROM role;
+    </select>
+    <select id="selectOneById" parameterType="Long" resultType="Role">
+        SELECT * FROM role WHERE roleId=#{roleId}
+    </select>
+    <select id="selectPage" resultType="Role" parameterType="Query">
+        SELECT * FROM role
+        <if test="keyWords != '' and keyWords!=null">
+            WHERE roleName CONCAT('%',#{keyWords},'%')
+        </if>
+        LIMIT  #{currentPage},#{pageSize};
+    </select>
+    <select id="selectAll" resultType="Role">
+        SELECT roleId AS roleId,roleName AS roleName FROM role;
+    </select>
+    <!--    List<Permission> selectPermission(Integer roleId);-->
+    <select id="selectPermission" parameterType="Integer" resultType="Permission">
+        SELECT p.permissionId,p.permissionName,p.path,p.sn
+        FROM role r
+        JOIN rolebypermission rp ON r.roleId = rp.roleId
+        JOIN permission p ON p.permissionId = rp.permissionId
+        WHERE r.roleId = #{roleId}
+    </select>
+</mapper>

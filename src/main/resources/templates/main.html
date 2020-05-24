@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/vue-router.js"></script>
+    <script type="text/javascript" src="../js/element.js"></script>
+    <script type="text/javascript" src="../js/axios.js"></script>
+    <link rel="stylesheet" href="../elementuiCss/element.css"/>
+</head>
+<style>
+    .side{
+        float:left;
+        margin-left: 5px;
+    }
+</style>
+<body style="margin: 0">
+    <div id="app">
+        <el-container>
+            <el-header style="background-color: #66b1ff">
+                <el-row>
+                    <el-col :span="5" style="font-size: xx-large">
+                        SuperSystem
+                    </el-col>
+                    <el-col :span="3" :offset="16" style="padding-top: 8px">
+                        <div class="side"  @click="userInfoUpdate">
+                            <el-avatar  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                        </div>
+                        <el-button class="side" type="text" style="color: #82848a" @click="logOut">logout</el-button>
+                    </el-col>
+                </el-row>
+            </el-header>
+            <el-container>
+                <el-aside width="200px" style="background-color: #5daf34;position: absolute;top: 60px;bottom: 0">
+                    <el-menu
+                            default-active="2"
+                            class="el-menu-vertical-demo"
+                            @open="handleOpen"
+                            @close="handleClose">
+                        <template v-for="(item,index) in asideMenu">
+                            <el-submenu index="index" v-if="item.children">
+                                <template slot="title"></i>{{item.name}}</template>
+                                <el-menu-item index="i" :key="child.path" v-for="(child,i) in item.children" @click="click(index+'-'+i)">{{child.name}}</el-menu-item>
+                            </el-submenu>
+                            <el-menu-item index="index" :key="item.path" v-else @click="click(index)">{{item.name}}</el-menu-item>
+                        </template>
+                    </el-menu>
+                </el-aside>
+                <el-main style="position: absolute;left: 200px;right: 0;padding: 0">
+                    主页展示
+                </el-main>
+            </el-container>
+        </el-container>
+    </div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el:'#app',
+        data:{
+            asideMenu:[
+                {name:"主页",path:"/index"},
+                {
+                    name:"副页",children:[
+                        {name:"1",path:"/q"},
+                        {name:"2",path:"/w"}
+                    ]
+                }
+            ]
+        },
+        methods:{
+            logOut(){
+                console.debug("logOut");
+            },
+            userInfoUpdate(){
+                console.debug("userInfoUpdate");
+            },
+            handleOpen(){
+                console.debug('菜单展开回调')
+            },
+            handleClose(){
+                console.debug('菜单收起回调')
+            },
+            click(index){
+                console.debug(index)
+            }
+        },
+        mounted(){
+            //加载菜单
+            axios.get('').then().catch();
+        }
+
+    });
+</script>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.activiti.tataainiyo.mapper.PermissionMapper">
+
+    <!--selectAll-->
+    <select id="selectAll" resultType="Permission">
+        SELECT permissionId AS permissionId,sn AS sn,path AS path FROM permission;
+    </select>
+    <!--allocationUrlPermission-->
+    <insert id="allocationUrlPermission" parameterType="list">
+        INSERT INTO permission(path,sn) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.path},#{item.sn})
+        </foreach>
+    </insert>
+    <!--
+    void insert(T t);
+    void delete(T t);
+    void update(T t);
+    T selectOneById(Long id);
+    List<T> selectPage(Query<T> query);
+    -->
+    <insert id="insert" parameterType="Permission" useGeneratedKeys="true" keyProperty="permissionId" keyColumn="permissionId">
+        INSERT INTO permission(permissionName,sn) VALUES(#{permissionName},#{sn});
+    </insert>
+    <update id="update" parameterType="Permission">
+        UPDATE permission SET permissionName=#{permissionName} WHERE permissionId=#{permissionId}
+    </update>
+    <delete id="delete" parameterType="Long">
+        DELETE FROM permission WHERE permissionId=#{permissionId}
+    </delete>
+    <select id="count" resultType="Long">
+        SELECT COUNT(*) FROM permission;
+    </select>
+    <select id="selectOneById" parameterType="Long" resultType="Permission">
+        SELECT * FROM permission WHERE permissionId=#{permissionId}
+    </select>
+    <select id="selectPage" resultType="Permission" parameterType="Query">
+        SELECT * FROM permission
+        <if test="keyWords != '' and keyWords!=null">
+            WHERE permissionName CONCAT('%',#{keyWords},'%')
+        </if>
+        LIMIT  #{currentPage},#{pageSize};
+    </select>
+</mapper>

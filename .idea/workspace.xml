@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c687c4c5-9986-41c0-bc6c-10fd4d6d9c2b" name="Default Changelist" comment="删除登录模块的psvm">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/activiti/tataainiyo/configuration/RedisConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/activiti/tataainiyo/configuration/LoggingConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/activiti/tataainiyo/configuration/LoggingConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/activiti/tataainiyo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/activiti/tataainiyo/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/activiti/tataainiyo/TataainiyoApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/activiti/tataainiyo/TataainiyoApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
+        <option value="FxmlFile" />
+        <option value="Interface" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aKEvDgqHq0AsqqCZej0CkUkwhw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="TODO_SCOPE" value="All Places" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/activiti/tataainiyo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Colors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\ideaProject\guoruan\tataainiyo\src\main\resources\static" />
+      <recent name="E:\ideaProject\guoruan\tataainiyo\src\main\resources\static\js" />
+      <recent name="E:\ideaProject\guoruan\tataainiyo\src\main\resources\templates" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\ideaProject\guoruan\tataainiyo\src\main\resources\processes" />
+      <recent name="E:\ideaProject\guoruan\tataainiyo\src\main\resources\com\activiti\tataainiyo\mapper" />
+      <recent name="E:\ideaProject\guoruan\tataainiyo\target" />
+      <recent name="E:\ideaProject\guoruan\tataainiyo\src\main\resources\static" />
+      <recent name="E:\ideaProject\guoruan\tataainiyo\src\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.activiti.tataainiyo.util" />
+      <recent name="com.activiti.tataainiyo.mapper" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.activiti.tataainiyo.controller" />
+      <recent name="com.activiti.tataainiyo.service.impl" />
+      <recent name="com.activiti.tataainiyo.demo" />
+      <recent name="com.activiti.tataainiyo.service" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.TataainiyoApplicationTests.t4">
+    <configuration name="A" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.activiti.tataainiyo.A" />
+      <module name="tataainiyo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.activiti.tataainiyo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.activiti.tataainiyo.main" />
+      <module name="tataainiyo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.activiti.tataainiyo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TataainiyoApplicationTests.t2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tataainiyo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.activiti.tataainiyo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.activiti.tataainiyo" />
+      <option name="MAIN_CLASS_NAME" value="com.activiti.tataainiyo.TataainiyoApplicationTests" />
+      <option name="METHOD_NAME" value="t2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TataainiyoApplicationTests.t3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tataainiyo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.activiti.tataainiyo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.activiti.tataainiyo" />
+      <option name="MAIN_CLASS_NAME" value="com.activiti.tataainiyo.TataainiyoApplicationTests" />
+      <option name="METHOD_NAME" value="t3" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TataainiyoApplicationTests.t4" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tataainiyo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.activiti.tataainiyo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.activiti.tataainiyo" />
+      <option name="MAIN_CLASS_NAME" value="com.activiti.tataainiyo.TataainiyoApplicationTests" />
+      <option name="METHOD_NAME" value="t4" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TataainiyoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="tataainiyo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.activiti.tataainiyo.TataainiyoApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.main" />
+      <item itemvalue="Application.A" />
+      <item itemvalue="JUnit.TataainiyoApplicationTests.t2" />
+      <item itemvalue="JUnit.TataainiyoApplicationTests.t3" />
+      <item itemvalue="JUnit.TataainiyoApplicationTests.t4" />
+      <item itemvalue="Spring Boot.TataainiyoApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TataainiyoApplicationTests.t4" />
+        <item itemvalue="Application.A" />
+        <item itemvalue="JUnit.TataainiyoApplicationTests.t3" />
+        <item itemvalue="JUnit.TataainiyoApplicationTests.t2" />
+        <item itemvalue="Application.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c687c4c5-9986-41c0-bc6c-10fd4d6d9c2b" name="Default Changelist" comment="" />
+      <created>1586476113580</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586476113580</updated>
+      <workItem from="1586476116954" duration="4129000" />
+      <workItem from="1586480276817" duration="18787000" />
+      <workItem from="1586514527737" duration="8977000" />
+      <workItem from="1586566627816" duration="14531000" />
+      <workItem from="1586661983606" duration="18296000" />
+      <workItem from="1586819023335" duration="1828000" />
+      <workItem from="1586833257531" duration="835000" />
+      <workItem from="1586834720911" duration="7951000" />
+      <workItem from="1586863388528" duration="1627000" />
+      <workItem from="1586914119842" duration="2700000" />
+      <workItem from="1586957476891" duration="5251000" />
+      <workItem from="1586990522151" duration="46652000" />
+      <workItem from="1587086182160" duration="23614000" />
+      <workItem from="1587206773055" duration="10012000" />
+      <workItem from="1587265525573" duration="46000" />
+      <workItem from="1587265598613" duration="14768000" />
+      <workItem from="1587300426095" duration="7949000" />
+      <workItem from="1587348354581" duration="18815000" />
+      <workItem from="1587478356028" duration="1304000" />
+      <workItem from="1587513777682" duration="5174000" />
+      <workItem from="1587521544752" duration="14919000" />
+      <workItem from="1587594232537" duration="13836000" />
+      <workItem from="1587636669253" duration="12587000" />
+      <workItem from="1587684496442" duration="2925000" />
+      <workItem from="1587778691666" duration="2344000" />
+      <workItem from="1587863576333" duration="1421000" />
+      <workItem from="1587865018217" duration="2801000" />
+      <workItem from="1587877984121" duration="156000" />
+      <workItem from="1587878160081" duration="10693000" />
+      <workItem from="1588061768908" duration="2030000" />
+      <workItem from="1588067445642" duration="5390000" />
+      <workItem from="1588121038312" duration="239000" />
+      <workItem from="1588140231363" duration="11079000" />
+      <workItem from="1588201041647" duration="17456000" />
+      <workItem from="1588307216554" duration="19952000" />
+      <workItem from="1588396567138" duration="17409000" />
+      <workItem from="1588458112316" duration="1401000" />
+      <workItem from="1588473396582" duration="44054000" />
+      <workItem from="1588646933645" duration="7138000" />
+      <workItem from="1588722626923" duration="520000" />
+      <workItem from="1588738324843" duration="22811000" />
+      <workItem from="1588809716197" duration="22841000" />
+      <workItem from="1588898181051" duration="597000" />
+      <workItem from="1589003351177" duration="16091000" />
+      <workItem from="1589111288096" duration="2691000" />
+      <workItem from="1589147594673" duration="14830000" />
+      <workItem from="1589369064904" duration="4652000" />
+      <workItem from="1589448348720" duration="3969000" />
+      <workItem from="1589590016073" duration="18980000" />
+      <workItem from="1589671632063" duration="3310000" />
+      <workItem from="1589772631015" duration="5511000" />
+      <workItem from="1589859769550" duration="1213000" />
+      <workItem from="1589893469860" duration="950000" />
+      <workItem from="1589930140411" duration="3175000" />
+      <workItem from="1589963519044" duration="2106000" />
+      <workItem from="1590061036028" duration="1584000" />
+      <workItem from="1590075901224" duration="804000" />
+      <workItem from="1590157628288" duration="44000" />
+      <workItem from="1590158925987" duration="263000" />
+      <workItem from="1590159207091" duration="286000" />
+      <workItem from="1590192807936" duration="295000" />
+      <workItem from="1590193124000" duration="94000" />
+      <workItem from="1590194066841" duration="56000" />
+      <workItem from="1590276890288" duration="5654000" />
+      <workItem from="1590362161721" duration="678000" />
+    </task>
+    <task id="LOCAL-00001" summary="初始化仓库  刘言">
+      <created>1589932093208</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589932093208</updated>
+    </task>
+    <task id="LOCAL-00002" summary="删除登录模块的psvm">
+      <created>1589968317601</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1589968317601</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="初始化仓库  刘言" />
+    <MESSAGE value="删除登录模块的psvm" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除登录模块的psvm" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/activiti/tataainiyo/service/impl/SystemServiceImpl.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/static/js/element.js</url>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>角色信息</title>
+    <script type="text/javascript" src="/js/axios.js"></script>
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <link rel="stylesheet" href="/elementuiCss/element.css">
+    <script type="text/javascript" src="/js/element.js"></script>
+</head>
+<style>
+    .el-transfer-panel{
+        width: 250px;
+    }
+</style>
+<body>
+<div id="role">
+    <el-table :data="roleTable" style="width: 100%" border>
+        <el-table-column label="RoleId" prop="roleId" width="180"></el-table-column>
+        <el-table-column label="角色名称" prop="roleName" width="180"></el-table-column>
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+                <el-button size="mini" @click="normalEdit(scope.row.roleId)">编辑</el-button>
+                <el-button size="mini" @click="permission(scope.row.roleId,scope.row.roleName)">权限</el-button>
+                <el-button size="mini" @click="menu(scope.row.roleId,scope.row.roleName)">菜单</el-button>
+                <el-button size="mini" @click="startProc(scope.row.roleId,scope.row.roleName)">启动项</el-button>
+                <el-button size="mini" @click="completeTask(scope.row.roleId)">审批项</el-button>
+                <el-button size="mini" @click="deleteRole(scope.row.roleId)" type="danger" >删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+
+    <el-dialog
+            title=""
+            :visible.sync="dialogVisible"
+            width="50%"
+            center="center"
+            :before-close="dialogClose">
+        <div slot="title" class="header-title">
+            <span v-show="titleName" class="title-name">{{titleName}}</span>
+        </div>
+        <div style="text-align: center">
+            <el-transfer
+                    style="text-align: left; display: inline-block"
+                    v-model="value"
+                    :props="{
+                      key: 'permissionId',
+                      label: 'sn'
+                    }"
+                    :titles="['系统权限', '角色权限']"
+                    :data="data">
+            </el-transfer>
+        </div>
+        <span slot="footer" class="dialog-footer">
+    <el-button @click="click">提交</el-button>
+  </span>
+    </el-dialog>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#role",
+        data:{
+            titleName:"",
+            value:[],
+            dialogVisible:false,
+            roleTable:[],
+            data:[],
+            role:{},
+            submitMethodName:""
+        },
+        methods:{
+            normalEdit(roleId){
+                let url = "/test/post";
+                axios.post(url,{"id":100,"userList":[{"name":"刘言"}]})
+            }, shuttleData(searchId,titleName,sysUrl,roleUrl,parameter,variableName){
+                this.role["roleId"] = searchId;
+                axios.get(sysUrl).then(data=>this.data=data.data);
+                axios.get(roleUrl,{params:parameter}).then(data=>{
+                    for(let i in data.data){
+                      this.value.push(data.data[i][variableName]);
+                    };
+                });
+                this.titleName = titleName;
+                this.dialogVisible = true;
+
+            },
+            menu(roleId,roleName){
+
+            },
+            permission(roleId,roleName){
+                this.submitMethodName = "permissionSubmit";
+                this.shuttleData(roleId,roleName,"/permission/selectAll","/role/selectPermission",{"roleId":roleId},"permissionId");
+            }, permissionSubmit(){
+                let url = "/role/updateRolePermission";
+                let listName = "permissionList";
+                this.submit(url,listName);
+            }, startProc(){
+
+            }, startProcSubmit(){
+                this.submit("/role/updateRolePermission","processDefList");
+            }, completeTask(){
+
+            }, deleteRole(){
+
+            }, dialogClose(){
+                this.data=[];
+                this.value=[];
+                this.role = {};
+                this.dialogVisible=false;
+            }, click(){
+                this[this.submitMethodName]();
+            }, submit(url,listName){
+                this.role[listName]=this.value;
+               axios.post(url,this.role).then(d=>{
+                   this.$message({
+                       message: d.data.msg,
+                       type: 'success'
+                   });
+               }).catch(e=>{
+                   this.$message({
+                       message: '操作失败',
+                       type: 'warning'
+                   });
+                   this.dialogVisible=false;
+               });
+
+            }
+        },
+        mounted(){
+            axios.get("/role/selectAll").then(data=>this.roleTable = data.data);
+        }
+    });
+</script>
+</html>

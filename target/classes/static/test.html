@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/axios.js"></script>
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <link rel="stylesheet" href="/elementuiCss/element.css">
+    <script type="text/javascript" src="/js/element.js"></script>
+</head>
+<body>
+    <div id="app">
+        <el-table  :data="user" style="width: 100%"  border>
+            <el-table-column prop="userId" v-if="show"></el-table-column>
+            <el-table-column prop="userName" label="用户名" width="180"></el-table-column>
+            <el-table-column prop="registerTime" label="注册时间" width="180"></el-table-column>
+
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button size="mini" @click="handleEdit( scope.$index)">编辑</el-button>
+                    <el-button size="mini" type="danger" @click="userRoleUpdate( scope.row.userId)">角色编辑</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+        <el-dialog title="info" :visible.sync="inputDialog">
+            <el-form :model="userInfo">
+                <el-form-item label="用户名" :label-width="formLabelWidth">
+                    <el-input v-model="userInfo.userName" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="注册时间" :label-width="formLabelWidth">
+                    <el-date-picker v-model="userInfo.registerTime" type="datetime" placeholder="选择日期时间"></el-date-picker>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="onSubmit">{{buttonName}}</el-button>
+                    <el-button>取消</el-button>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+        <!--穿梭框-->
+        <el-dialog title="roleInfo" :visible.sync="roleDialog" @close="roleInfoClose"  center="center" width="45%">
+            <div style="text-align: center">
+            <el-transfer style="text-align: left; display: inline-block" v-model="userRole" :data="roleList"  :props="{key: 'roleId',label: 'roleName'}"></el-transfer>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button type="primary"  @click="updateRole">提 交</el-button>
+            </div>
+        </el-dialog>
+    </div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el:"#app",
+        data:{
+            center:true,
+            formLabelWidth: '120px',
+            buttonName:"register",
+            buttonName:'',
+            roleDialog:false,
+            inputDialog:false,
+            show:false,
+            //表格数据
+            user:[],
+            //单个用户信息
+            userInfo:{},
+            //系统角色
+            //缓冲角色
+            roleListBuf:[],
+            roleList:[],
+            //用户角色
+            userRole:[],
+            //用户角色信息（发送）
+            userRoleInfo:{'userId':-1,'roleList':[]},
+        },
+        mounted(){
+            axios.get("/user/selectPage").then( result => (this.user=result.data.data)).catch();
+        },
+        methods:{
+            operationInfo(message) {
+                const h = this.$createElement;
+                this.$notify({
+                    title: 'info',
+                    duration: 2000,
+                    message: h('i', { style: 'color: teal'}, message)
+                });
+                },
+            onSubmit(){},
+            addOrUpdate(url,data){
+                url=url+'?';
+                for(let key in data) {
+                    if (data[key] != null && data[key] != '' && data[key].length!=0) {
+                        url = url + key + '=' + data[key] + '/';
+                    }
+                }
+                console.debug(url)
+            },
+            handleEdit(index){
+                this.userInfo=JSON.parse( JSON.stringify(this.user[index]));
+                this.inputDialog=true;
+            },
+            userRoleUpdate(id){
+                //系统权限
+                this.userRoleInfo['userId']=id;
+                if(this.roleListBuf.length==0){
+                    axios.get("/role/selectAll").then(data=>{
+                        this.roleListBuf=data.data;
+                        this.roleList=data.data
+                    });
+                }else {
+                    this.roleList = this.roleListBuf;
+                }
+                //用户权限(格式转换只需要id即可)
+                 axios.get("/user/userByRole?userId="+id).then(data=>{
+                     for(let id in data.data){
+                         this.userRole.push(data.data[id]['roleId']);
+                     }
+                     console.debug(this.userRole)
+                 });
+                this.roleDialog=true;
+            },
+            updateRole(){
+                //数据格式
+                for(let id in this.userRole){
+                    this.userRoleInfo['roleList'].push({'roleId':id});
+                }
+                axios.post("/user/addUserRole",this.userRoleInfo).then(data=>{
+                    this.roleDialog=false;
+                    this.operationInfo(data.msg);
+                });
+            },
+            roleInfoClose(){
+                this.roleList=[];
+                this.userRole=[];
+                this.userRoleInfo={'userId':-1,'roleList':[]};
+            }
+        }
+    });
+</script>
+</html>

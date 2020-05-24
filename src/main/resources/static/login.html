@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script type="text/javascript" src="./js/vue-router.js"></script>
+    <script type="text/javascript" src="./js/element.js"></script>
+    <script type="text/javascript" src="./js/axios.js"></script>
+    <link rel="stylesheet" href="./elementuiCss/element.css"/>
+</head>
+<body>
+<div id="login" style="position: absolute;top: 25%;bottom: 40%;left: 35%;right: 35%;">
+    <h1 align="center">Login</h1>
+    <el-form ref="form" :model="loginfo" label-width="100px">
+        <el-form-item label="用户名">
+            <el-input v-model="loginfo.userName"></el-input>
+        </el-form-item>
+        <el-form-item >
+            <label slot="label">密&emsp;码</label>
+            <el-input show-passWord v-model="loginfo.passWord"></el-input>
+        </el-form-item>
+        <el-form-item >
+            <div style="position: absolute;right: 0">
+                <el-button type="primary" @click="onSubmit">登录</el-button>
+                <el-button>注册</el-button>
+            </div>
+        </el-form-item>
+    </el-form>
+</div>
+
+</body>
+<script>
+    new Vue({
+        el:'#login',
+        data:{
+            loginfo:{
+                userName:"",
+                passWord:""
+            }
+        },
+        methods:{
+            onSubmit(){
+                var url='/login?userName='+this.loginfo.userName+'&passWord='+this.loginfo.passWord;
+                axios.get(url)
+                    .then(response=>{
+                        window.location.href='/success';
+                        //console.debug(response.data.msg)
+                    })
+                    .catch(function (error) { // 请求失败处理
+                        console.log(error);
+                    });s
+            }
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.activiti.tataainiyo.mapper.MenuMapper">
+    <resultMap id="map" type="Menu">
+        <id property="menuId" column="menuId"></id>
+        <result property="label" column="label"></result>
+        <collection property="children" ofType="Menu">
+            <result property="label" column="clabel"></result>
+            <result property="path" column="path"></result>
+            <result property="parentId" column="parentId"></result>
+        </collection>
+    </resultMap>
+    <select id="selectAll" resultMap="map">
+        SELECT p.menuId,p.label,
+               c.menuId,c.label AS clabel,c.path,c.parentId
+               FROM menu p
+               JOIN menu c ON c.parentId = p.menuId;
+    </select>
+    <insert id="insertParent" parameterType="Menu" useGeneratedKeys="true" keyProperty="menuId" keyColumn="menuId">
+        INSERT INTO menu(label) value (#{label});
+    </insert>
+    <insert id="urlAllocationMenu" parameterType="list">
+        INSERT INTO menu(label,parentId,path) VALUES
+        <foreach collection="list" item="menu" separator=",">
+            (#{menu.label},#{menu.parentId},#{menu.path})
+        </foreach>
+    </insert>
+    <!--
+    void insert(T t);
+    void delete(T t);
+    void update(T t);
+    T selectOneById(Long id);
+    List<T> selectPage(Query<T> query);
+    -->
+    <insert id="insert" parameterType="Menu" keyColumn="menuId" keyProperty="menuId" useGeneratedKeys="true">
+        INSERT INTO menu(label) value (#{label});
+    </insert>
+   <delete id="delete" parameterType="Long">
+       DELETE FROM menu WHERE menuId=#{menuId};
+   </delete>
+    <update id="update" parameterType="Menu">
+        UPDATE menu SET label=#{label},path=#{path} WHERE menuId=#{menuId};
+    </update>
+    <select id="selectOneById" parameterType="Long" resultType="Menu">
+        SELECT * FROM user WHERE menuId=#{menuId};
+    </select>
+    <select id="count" resultType="Long">
+        SELECT count (*) FROM menu;
+    </select>
+
+    <select id="selectPage" parameterType="Query" >
+        SELECT * FROM user
+        <if test="keyWords == '' and keyWords == null">
+            WHERE label CONCAT('%',#{keyWords},'%')
+        </if>
+        LIMIT #{currentPage},#{pageSize};
+    </select>
+
+    <select id="userByMenu" parameterType="long" resultMap="map">
+        SELECT p.menuId,p.label,
+               c.menuId,c.label AS clabel,c.path,c.parentId
+          FROM menu c JOIN menu p ON c.parentId = p.menuId
+                            JOIN rolebymenu rm ON p.menuId = rm.menuId
+                            JOIN role r ON r.roleId = rm.roleId
+                            JOIN userbyrole ur ON ur.roleId = r.roleId
+                            JOIN user u ON ur.userId = u.userId
+                            WHERE u.userId = #{userId};
+    </select>
+</mapper>

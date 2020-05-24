@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/axios.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/vue-router.js"></script>
+    <link rel="stylesheet" href="../elementuiCss/element.css">
+    <script type="text/javascript" src="../js/element.js"></script>
+    <script type="text/javascript" src="./modelOne.js"></script>
+    <script type="text/javascript" src="./routers.js"></script>
+</head>
+<body>
+    <!--v-for可以遍历数组或对象,如果是数组的当前对象是元素,如果是对象当前对象是值-->
+    <div id="myApp">
+        <!--表示跳转到那个路由链接,最终会被转换为<a href="#to地址"></a>-->
+        <router-link to="/modelOne">slider</router-link>
+        <!--渲染路由所对应的组件的地方-->
+        <router-view></router-view>
+    </div>
+</body>
+<script>
+    //使用vue路由
+    Vue.use(VueRouter);
+
+
+    new Vue({
+        el:"#myApp",
+        //router:router
+        //默认找名为router
+        router:xxrouter,
+        mounted(){
+        }
+    })
+
+</script>
+</html>

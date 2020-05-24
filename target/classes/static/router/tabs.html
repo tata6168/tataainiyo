@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/axios.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/vue-router.js"></script>
+    <link rel="stylesheet" href="../elementuiCss/element.css">
+
+    <script type="text/javascript" src="../js/element.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+    <script type="text/javascript" src="./modelOne.js"></script>
+<!--    <script type="module" src="./routers.js"></script>-->
+<!--    <script type="text/javascript" src="./rout.js"></script>-->
+    <style>
+        .el-tabs__header {
+            padding: 0;
+            position: relative;
+            margin: 0 0 10px
+        }
+        .el-main{
+            padding: 0;
+        }
+    </style>
+</head>
+<body style="margin: 0">
+
+    <div id="tab">
+        <el-container style="position: absolute;bottom: 0;top: 0">
+            <el-aside width="200px" style="background-color: #dd6161">
+                <el-menu
+                        default-active="2"
+                        class="el-menu-vertical-demo"
+                        @open="handleOpen"
+                        @close="handleClose">
+                    <template v-for="(item,index) in $router.options.routes">
+                        <el-menu-item index="index" @click="addTab(item.path,index+1)">{{item.path}}</el-menu-item>
+                    </template>
+
+                </el-menu>
+            </el-aside>
+            <el-main>
+                <el-tabs v-model="model" type="card" closable @tab-remove="removeTab" @tab-click="click($event.name)">
+                    <el-tab-pane
+                            v-for="(item, index) in tabs"
+                            :key="item.name"
+                            :label="item.title"
+                            :name="item.name"
+                    >
+                        <router-view></router-view>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-main>
+
+        </el-container>
+    </div>
+</body>
+<script type="module">
+    import test from './test.vue';
+    let routes = [
+        {path:"/index",component:index},
+        {path:"/modelOne",component:modelOne},
+        {path:"/test",component:test}
+    ];
+    var xxrouter = new VueRouter({
+        routes:routes
+    });
+    Vue.use(VueRouter);
+    new Vue({
+        el:"#tab",
+        router:xxrouter,
+        data:{
+            model:"0",
+            tabs:[{
+                title:"主页",
+                name:"0",
+                path:"",
+            }],
+        },
+        methods:{
+            handleOpen(){},
+            handleClose(){},
+            click(tabName){
+                console.debug(tabName)
+                for(i in this.tabs){
+                    if(this.tabs[i].name === tabName){
+                        this.$router.push(this.tabs[i].path);
+                    }
+                }
+            },
+            addTab(path,index){
+                index = index.toString();
+                for(i in this.tabs){
+                    if(this.tabs[i].name === index){
+                        this.click(this.tabs[i].name);
+                        this.model = index;
+                        return;
+                    }
+                }
+                console.debug(path+':'+index);
+                this.tabs.push({
+                    title:"页面"+(index),
+                    name:index,
+                    path:path,
+                });
+                this.$router.push(path);
+                //添加标签页时，直接展示添加的页面
+                this.model = index;
+            },
+            removeTab(tabName){
+                console.debug(tabName);
+                //如果当前页面正在展示，需要更换页面
+                if(this.model === tabName && this.tabs.length >= 2){
+                    for (let i = 0; i < this.tabs.length; i++) {
+                        if (this.tabs[i].name===tabName){
+                            let item = this.tabs[i-1]||this.tabs[i+1];
+                            this.model = item.name;
+                            break;
+                        }
+                    }
+                }
+                let tabs = this.tabs;
+                this.tabs = tabs.filter(item =>item['name'] !== tabName);
+            }
+        }
+    });
+</script>
+
+</html>

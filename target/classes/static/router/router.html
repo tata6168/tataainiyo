@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/axios.js"></script>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/vue-router.js"></script>
+    <link rel="stylesheet" href="../elementuiCss/element.css">
+    <script type="text/javascript" src="../js/element.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+    <script type="text/javascript" src="./modelOne.js"></script>
+    <script type="text/javascript" src="./routers.js"></script>
+</head>
+<body>
+    <div id="rou">
+        <button @click="$router.push('/index')">router</button>
+        <div>
+            <router-view></router-view>
+        </div>
+    </div>
+<script>
+    Vue.use(VueRouter);
+    new Vue({
+        el:"#rou",
+        router:xxrouter,
+        methods:{
+            rou(){
+                console.debug("asdsad");
+            }
+        }
+    });
+</script>
+</body>
+</html>

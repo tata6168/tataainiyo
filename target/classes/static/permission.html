@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限</title>
+    <script type="text/javascript" src="/js/axios.js"></script>
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <link rel="stylesheet" href="/elementuiCss/element.css">
+    <script type="text/javascript" src="/js/element.js"></script>
+    <script type="text/javascript" src="/js/util.js"></script>
+    <script type="text/javascript" src="/js/utilTwo.js"></script>
+</head>
+<body>
+<div id="permission">
+    <el-table :data="permissionTable" style="width: 100%" border>
+        <el-table-column label="index" prop="permissionId" width="80" ></el-table-column>
+        <el-table-column label="权限" prop="permissionName" width="180"></el-table-column>
+        <el-table-column label="路径" prop="path" width="180"></el-table-column>
+        <el-table-column label="shiro" prop="sn" width="180"></el-table-column>
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+                <el-button size="mini" @click="normalEdit(scope.$index)">编辑</el-button>
+                <el-button size="mini" @click="normalEdit()">添加</el-button>
+                <el-button size="mini" @click="deletePermission(scope.row.permissionId,scope.$index)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination
+            @size-change="sizeChange"
+            @current-change="changePage"
+            :current-page="query.currentPage"
+            :page-sizes="pageSizes"
+            :page-size="query.pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+    </el-pagination>
+
+    <el-dialog title="权限编辑" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+        <el-form :label-position="label" label-width="80px" :model="permissionForm">
+
+            <el-form-item label="Name">
+                <el-input v-model="permissionForm.permissionName"></el-input>
+            </el-form-item>
+            <el-form-item label="路径">
+                <el-input v-model="permissionForm.path"></el-input>
+            </el-form-item>
+            <el-form-item label="shiro">
+                <el-input v-model="permissionForm.sn"></el-input>
+            </el-form-item>
+        </el-form>
+
+        <span slot="footer" class="dialog-footer">
+             <el-button type="primary" @click="formSubmit">提交数据</el-button>
+        </span>
+    </el-dialog>
+    <button-counter></button-counter>
+    <button-counter2></button-counter2>
+</div>
+</body>
+<script>
+    new Vue({
+        el:"#permission",
+        data:{
+            label:'left',
+            permissionForm:{},
+            dialogVisible:false,
+            tableUrl:"/permission/selectPage",
+            query:{"currentPage": 1,"pageSize":10,"keyWords":""},
+            pageSizes:[10,50,100],
+            total:10,
+            show:false,
+            permissionTable:[]
+        },
+        methods:{
+            //弹窗关闭回调
+            handleClose(){
+                this.permissionForm={};
+                this.dialogVisible=false;
+            },
+            normalEdit(index){
+                if(!(index===undefined))
+                    this.permissionForm = this.permissionTable[index];
+                this.dialogVisible=true;
+            },
+            sizeChange(val){
+                this.query.pageSize=val;
+                this.selectPage();
+            },
+            changePage(val){
+                this.query.currentPage=val;
+                this.selectPage();
+            },
+            selectPage(){
+                axios.get(dataTransformUrl(this.tableUrl,this.query)).then(data=>{
+                    this.total=data.data.count;
+                    this.permissionTable=data.data.data;
+                });
+            },
+            deletePermission(permissionId,index){
+               axios.delete("/permission/delete?permissionId="+permissionId).then(data=>{
+                   this.permissionTable.splice(index,1);
+                   this.notifySuccess();
+               }).catch(execution=>this.notifyError());
+            }
+            ,
+            formSubmit(){
+                if(this.permissionForm['permissionId']){
+                    axios.post("/permission/update",this.permissionForm).then(data=>{
+                        this.notifySuccess();
+                    }).catch(execution=>{
+                       this.notifyError();
+                    });
+                }else {
+                    axios.post("/permission/insert", this.permissionForm).then(data => {
+                        this.notifySuccess();
+                    }).catch(execution => {
+                        this.notifyError();
+                    });
+                }
+                this.dialogVisible=false;
+            },
+            notifyError(){
+                this.$notify.error({
+                    duration:2000,
+                    message: 'error'
+                });
+            },
+            notifySuccess(){
+                this.$notify({
+                    duration:2000,
+                    message: '操作成功',
+                    type: 'success'
+                });
+            }
+        },
+        mounted(){
+            this.selectPage();
+        }
+    })
+</script>
+</html>

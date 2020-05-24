@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activiti</title>
+    <script type="text/javascript" src="/js/axios.js"></script>
+    <script type="text/javascript" src="/js/vue.js"></script>
+    <link rel="stylesheet" href="/elementuiCss/element.css">
+    <script type="text/javascript" src="/js/element.js"></script>
+</head>
+<body>
+    <div id="activiti">
+        <el-tree
+                :data="data"
+                :props="defaultProps"
+                accordion
+                @node-click="handleNodeClick">
+        </el-tree>
+    </div>
+</body>
+<script>
+    new Vue({
+        el:"#activiti",
+        data:{},
+        methods:{}
+    })
+</script>
+</html>
